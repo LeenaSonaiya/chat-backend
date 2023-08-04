@@ -105,11 +105,25 @@ io.on("connection", (socket) => {
     console.log("........", data.msg_type);
     if (receiverSocket) {
       // ssocket.to(receiverSocket.socketId).emit("msg-recieve", {to:receiverSocket.userID, message:data.message});
+     if(data.message) 
+     {
       io.to(receiverSocket.socketId).emit("msg-recieve", {
         message: data.message,
         to: data.from,
         msg_type: data.msg_type,
       });
+     }
+     else
+     {
+      io.to(receiverSocket.socketId).emit("msg-recieve", {
+        attechment: data.attechment,
+        to: data.from,
+        msg_type: data.msg_type,
+      });
+     }
+     
+
+
     }
   });
   //remove user
